@@ -1,153 +1,96 @@
-/* ==========================================
-   PORTFOLIO JAVASCRIPT
-========================================== */
+/*=========================================
+            PAGE LOADER
+=========================================*/
 
-// ==========================
-// MOBILE MENU
-// ==========================
+window.addEventListener("load", () => {
 
-const menuBtn = document.getElementById("menuBtn");
-const nav = document.getElementById("nav");
+    const loader = document.getElementById("loader");
 
-menuBtn.addEventListener("click", () => {
-    nav.classList.toggle("active");
-});
+    if (loader) {
+        loader.style.opacity = "0";
 
-// Close menu when a link is clicked
-document.querySelectorAll("nav a").forEach(link => {
-    link.addEventListener("click", () => {
-        nav.classList.remove("active");
-    });
-});
-
-
-// ==========================
-// DARK MODE
-// ==========================
-
-const darkBtn = document.getElementById("darkMode");
-
-if (localStorage.getItem("theme") === "dark") {
-    document.body.classList.add("dark");
-    darkBtn.innerHTML = '<i class="fas fa-sun"></i>';
-}
-
-darkBtn.addEventListener("click", () => {
-
-    document.body.classList.toggle("dark");
-
-    if (document.body.classList.contains("dark")) {
-
-        localStorage.setItem("theme", "dark");
-
-        darkBtn.innerHTML = '<i class="fas fa-sun"></i>';
-
-    } else {
-
-        localStorage.setItem("theme", "light");
-
-        darkBtn.innerHTML = '<i class="fas fa-moon"></i>';
-
+        setTimeout(() => {
+            loader.style.display = "none";
+        }, 500);
     }
 
 });
 
 
-// ==========================
-// TYPING EFFECT
-// ==========================
+/*=============
 
-const words = [
+  TOGGLER 
 
-    "Full-stack Developer",
+  ======================*/
 
-    "Mobile Developer",
-
-    "JavaScript Developer",
-
-    "PHP Developer",
-
-    "React-JS Developer",
-
-    "UI/UX Enthusiast"
-
-];
-
-let wordIndex = 0;
-let letterIndex = 0;
-let deleting = false;
-
-const typing = document.getElementById("typing");
-
-function typeEffect() {
-
-    const currentWord = words[wordIndex];
-
-    if (!deleting) {
-
-        typing.textContent =
-            currentWord.substring(0, letterIndex + 1);
-
-        letterIndex++;
-
-        if (letterIndex === currentWord.length) {
-
-            deleting = true;
-
-            setTimeout(typeEffect, 1200);
-
-            return;
-
-        }
-
-    } else {
-
-        typing.textContent =
-            currentWord.substring(0, letterIndex - 1);
-
-        letterIndex--;
-
-        if (letterIndex === 0) {
-
-            deleting = false;
-
-            wordIndex++;
-
-            if (wordIndex >= words.length)
-                wordIndex = 0;
-
-        }
-
-    }
-
-    setTimeout(typeEffect, deleting ? 70 : 120);
-
-}
-
-typeEffect();
+  
 
 
-// ==========================
-// BACK TO TOP BUTTON
-// ==========================
+/*=========================================
+        STICKY NAVBAR
+=========================================*/
 
-const topBtn = document.getElementById("topBtn");
+const header = document.querySelector("header");
 
 window.addEventListener("scroll", () => {
 
-    if (window.scrollY > 400) {
+    if (window.scrollY > 80) {
 
-        topBtn.style.display = "block";
+        header.style.background = "rgba(8,17,31,.95)";
+        header.style.boxShadow = "0 10px 30px rgba(0,0,0,.3)";
 
     } else {
 
-        topBtn.style.display = "none";
+        header.style.background = "transparent";
+        header.style.boxShadow = "none";
 
     }
 
 });
 
-topBtn.addEventListener("click", () => {
+
+/*=========================================
+        SCROLL PROGRESS BAR
+=========================================*/
+
+const progressBar = document.getElementById("progress-bar");
+
+window.addEventListener("scroll", () => {
+
+    const scrollTop = document.documentElement.scrollTop;
+
+    const height =
+        document.documentElement.scrollHeight -
+        document.documentElement.clientHeight;
+
+    const progress = (scrollTop / height) * 100;
+
+    progressBar.style.width = progress + "%";
+
+});
+
+
+/*=========================================
+            BACK TO TOP
+=========================================*/
+
+const backToTop = document.getElementById("backToTop");
+
+window.addEventListener("scroll", () => {
+
+    if (window.scrollY > 500) {
+
+        backToTop.style.display = "flex";
+
+    } else {
+
+        backToTop.style.display = "none";
+
+    }
+
+});
+
+backToTop.onclick = () => {
 
     window.scrollTo({
 
@@ -157,15 +100,16 @@ topBtn.addEventListener("click", () => {
 
     });
 
-});
+};
 
 
-// ==========================
-// ACTIVE NAVIGATION
-// ==========================
+/*=========================================
+        ACTIVE NAVIGATION
+=========================================*/
 
 const sections = document.querySelectorAll("section");
-const navLinks = document.querySelectorAll("nav a");
+
+const navLinks = document.querySelectorAll(".nav-links a");
 
 window.addEventListener("scroll", () => {
 
@@ -198,115 +142,187 @@ window.addEventListener("scroll", () => {
 });
 
 
-// ==========================
-// SCROLL REVEAL ANIMATION
-// ==========================
+/*=========================================
+            COUNTER
+=========================================*/
 
-const revealElements = document.querySelectorAll(
+const counters = document.querySelectorAll(".counter");
 
-    ".hero-text,.hero-image,.about-container,.skill,.project-card,#contact form"
+const counterObserver = new IntersectionObserver(entries => {
 
-);
+    entries.forEach(entry => {
 
-function reveal() {
+        if (entry.isIntersecting) {
 
-    revealElements.forEach(el => {
+            const counter = entry.target;
 
-        const windowHeight = window.innerHeight;
+            const target = +counter.dataset.target;
 
-        const revealTop = el.getBoundingClientRect().top;
+            let current = 0;
 
-        if (revealTop < windowHeight - 100) {
+            const increment = target / 120;
 
-            el.style.opacity = "1";
+            const updateCounter = () => {
 
-            el.style.transform = "translateY(0)";
+                current += increment;
+
+                if (current < target) {
+
+                    counter.innerText = Math.ceil(current);
+
+                    requestAnimationFrame(updateCounter);
+
+                } else {
+
+                    counter.innerText = target;
+
+                }
+
+            };
+
+            updateCounter();
+
+            counterObserver.unobserve(counter);
 
         }
 
     });
 
+}, {
+
+    threshold: 0.5
+
+});
+
+counters.forEach(counter => {
+
+    counterObserver.observe(counter);
+
+});
+
+
+/*=========================================
+            MOBILE MENU
+=========================================*/
+
+const menuBtn = document.querySelector(".menu-btn");
+
+const navMenu = document.querySelector(".nav-links");
+
+menuBtn.addEventListener("click", () => {
+
+    navMenu.classList.toggle("show");
+
+});
+
+
+document.querySelectorAll(".nav-links a").forEach(link => {
+
+    link.addEventListener("click", () => {
+
+        navMenu.classList.remove("show");
+
+    });
+
+});
+
+
+/*=========================================
+            DARK MODE
+=========================================*/
+
+/*=========================================
+            DARK MODE
+=========================================*/
+
+const themeToggle = document.getElementById("theme-toggle");
+const icon = themeToggle.querySelector("i");
+
+// Load saved theme
+if(localStorage.getItem("theme") === "light"){
+
+    document.body.classList.add("light-mode");
+    icon.classList.remove("fa-moon");
+    icon.classList.add("fa-sun");
+
 }
 
-revealElements.forEach(el => {
+themeToggle.addEventListener("click",()=>{
 
-    el.style.opacity = "0";
+    document.body.classList.toggle("light-mode");
 
-    el.style.transform = "translateY(40px)";
+    if(document.body.classList.contains("light-mode")){
 
-    el.style.transition = "all .7s ease";
+        localStorage.setItem("theme","light");
 
-});
+        icon.classList.remove("fa-moon");
+        icon.classList.add("fa-sun");
 
-window.addEventListener("scroll", reveal);
+    }else{
 
-reveal();
+        localStorage.setItem("theme","dark");
 
+        icon.classList.remove("fa-sun");
+        icon.classList.add("fa-moon");
 
-// ==========================
-// CONTACT FORM
-// ==========================
-
-const form = document.querySelector("form");
-
-form.addEventListener("submit", function(e) {
-
-    e.preventDefault();
-
-    alert("Thank you! Your message has been received.");
-
-    form.reset();
+    }
 
 });
 
+/*=========================================
+        SMOOTH SCROLL
+=========================================*/
 
-// ==========================
-// CURRENT YEAR
-// ==========================
+document.querySelectorAll('a[href^="#"]').forEach(anchor => {
 
-const footerText = document.querySelector("footer p");
+    anchor.addEventListener("click", function (e) {
 
-footerText.innerHTML =
-`© ${new Date().getFullYear()} Your Name. All Rights Reserved.`;
+        e.preventDefault();
 
+        const target = document.querySelector(this.getAttribute("href"));
 
-// ==========================
-// HERO IMAGE HOVER EFFECT
-// ==========================
+        if (target) {
 
-const heroImage = document.querySelector(".hero-image img");
+            target.scrollIntoView({
 
-heroImage.addEventListener("mouseenter", () => {
+                behavior: "smooth"
 
-    heroImage.style.transform = "scale(1.05)";
+            });
 
-});
-
-heroImage.addEventListener("mouseleave", () => {
-
-    heroImage.style.transform = "scale(1)";
-
-});
-
-
-// ==========================
-// PROJECT CARD HOVER
-// ==========================
-
-document.querySelectorAll(".project-card").forEach(card => {
-
-    card.addEventListener("mouseenter", () => {
-
-        card.style.boxShadow =
-        "0 20px 40px rgba(0,0,0,.18)";
+        }
 
     });
 
-    card.addEventListener("mouseleave", () => {
+});
 
-        card.style.boxShadow =
-        "0 8px 25px rgba(0,0,0,.08)";
 
-    });
+/*=========================================
+        CURRENT YEAR
+=========================================*/
+
+const year = document.getElementById("year");
+
+if (year) {
+
+    year.textContent = new Date().getFullYear();
+
+}
+
+
+/*=========================================
+        SIMPLE PARALLAX EFFECT
+=========================================*/
+
+const heroImage = document.querySelector(".hero-image");
+
+window.addEventListener("mousemove", (e) => {
+
+    if (!heroImage) return;
+
+    const x = (window.innerWidth / 2 - e.pageX) / 40;
+    const y = (window.innerHeight / 2 - e.pageY) / 40;
+
+    heroImage.style.transform =
+        `translate(${x}px, ${y}px)`;
 
 });
