@@ -1,282 +1,338 @@
 /*=========================================
-        LARGE TABLETS
+        LARGE LAPTOPS (1400px)
+=========================================*/
+
+@media (max-width:1400px){
+
+section{
+    padding:100px 7%;
+}
+
+.navbar{
+    padding:18px 7%;
+}
+
+.hero-content h1{
+    font-size:4rem;
+}
+
+.hero-image img{
+    width:380px;
+}
+
+}
+
+
+/*=========================================
+        LAPTOPS (1200px)
 =========================================*/
 
 @media (max-width:1200px){
 
-body{
-
-padding:30px;
-
-}
-
-.resume{
-
-grid-template-columns:300px 1fr;
-
-}
-
-.content{
-
-padding:40px;
-
-}
-
-.projects{
+.hero-container{
 
 grid-template-columns:1fr;
-
-}
-
-}
-
-/*=========================================
-        TABLETS
-=========================================*/
-
-@media (max-width:992px){
-
-body{
-
-padding:20px;
-
-background:#ffffff;
-
-}
-
-.resume{
-
-grid-template-columns:1fr;
-
-}
-
-.sidebar{
-
-padding:40px;
 
 text-align:center;
 
 }
 
-.profile img{
-
-width:150px;
-
-height:150px;
-
-}
-
-.card li{
+.hero-buttons{
 
 justify-content:center;
 
 }
 
-.content{
+.hero-social{
 
-padding:35px;
+justify-content:center;
 
 }
 
-.content h2{
+.hero-image{
 
-font-size:24px;
+margin-top:60px;
+
+}
+
+.about-container{
+
+grid-template-columns:1fr;
+
+}
+
+.skills-container{
+
+grid-template-columns:1fr;
+
+}
+
+.projects-container{
+
+grid-template-columns:repeat(2,1fr);
+
+}
+
+.services-container{
+
+grid-template-columns:repeat(2,1fr);
+
+}
+
+.footer-container{
+
+grid-template-columns:repeat(2,1fr);
+
+}
+
+}
+
+
+/*=========================================
+            TABLETS
+=========================================*/
+@media(max-width:992px){
+
+.nav-links{
+
+position:absolute;
+top:100%;
+left:0;
+width:100%;
+background:#08111F;
+flex-direction:column;
+align-items:center;
+padding:30px 0;
+display:flex;
+
+opacity:0;
+visibility:hidden;
+transform:translateY(-20px);
+
+transition:.4s;
+
+}
+
+.nav-links.show{
+
+opacity:1;
+visibility:visible;
+transform:translateY(0);
+
+}
+
+body.light-mode .nav-links{
+
+background:#ffffff;
 
 }
 
 }
 
 /*=========================================
-        MOBILE
+            MOBILE
 =========================================*/
 
 @media (max-width:768px){
 
-body{
+section{
 
-padding:12px;
-
-}
-
-.resume{
-
-border-radius:12px;
+padding:90px 25px;
 
 }
 
-.sidebar{
+.hero{
+
+padding-top:140px;
+
+}
+
+.hero-content h1{
+
+font-size:2.7rem;
+
+}
+
+.hero-content h2{
+
+font-size:1.4rem;
+
+}
+
+.hero-image img{
+
+width:280px;
+
+}
+
+.hero-buttons{
+
+flex-direction:column;
+
+}
+
+.btn-primary,
+.btn-secondary{
+
+width:100%;
+
+justify-content:center;
+
+}
+
+.projects-container{
+
+grid-template-columns:1fr;
+
+}
+
+.services-container{
+
+grid-template-columns:1fr;
+
+}
+
+.footer-container{
+
+grid-template-columns:1fr;
+
+}
+
+.contact-info,
+.contact-form{
+
+padding:30px;
+
+}
+
+.hero-social{
+
+flex-wrap:wrap;
+
+}
+
+}
+
+
+/*=========================================
+            SMALL PHONES
+=========================================*/
+
+@media (max-width:576px){
+
+.logo{
+
+font-size:1.5rem;
+
+}
+
+.section-title h2{
+
+font-size:2rem;
+
+}
+
+.section-title p{
+
+font-size:.95rem;
+
+}
+
+.hero-content h1{
+
+font-size:2.3rem;
+
+}
+
+.hero-content h2{
+
+font-size:1.2rem;
+
+}
+
+.hero-image img{
+
+width:230px;
+
+}
+
+.about-image img{
+
+width:100%;
+
+}
+
+.service-card{
 
 padding:30px 20px;
 
 }
 
-.content{
+.project-content{
 
-padding:25px;
-
-}
-
-.profile img{
-
-width:130px;
-
-height:130px;
+padding:20px;
 
 }
 
-.profile h1{
+.contact-item{
 
-font-size:26px;
+flex-direction:column;
 
-}
-
-.profile span{
-
-font-size:15px;
+align-items:flex-start;
 
 }
 
-.content h2{
+.footer-newsletter input{
 
-font-size:22px;
-
-}
-
-.experience,
-.education,
-.project-card{
-
-padding:18px;
+font-size:.95rem;
 
 }
 
-.tech{
+.footer-newsletter button{
 
-gap:6px;
-
-}
-
-.tech span{
-
-font-size:11px;
-
-padding:5px 10px;
-
-}
-
-.qr img{
-
-width:140px;
+font-size:.95rem;
 
 }
 
 }
+
 
 /*=========================================
-        SMALL PHONES
+            EXTRA SMALL
 =========================================*/
 
-@media (max-width:480px){
+@media (max-width:400px){
 
-.profile img{
+.hero-content h1{
 
-width:110px;
-
-height:110px;
+font-size:2rem;
 
 }
 
-.profile h1{
+.hero-content p{
 
-font-size:22px;
-
-}
-
-.card h2{
-
-font-size:17px;
+font-size:.95rem;
 
 }
 
-.content h2{
+.hero-image img{
 
-font-size:20px;
-
-}
-
-.content{
-
-padding:18px;
+width:200px;
 
 }
 
-.experience h3,
-.education h3{
+.section-title h2{
 
-font-size:18px;
-
-}
-
-.card li{
-
-font-size:14px;
+font-size:1.7rem;
 
 }
 
-}
+.btn-primary,
+.btn-secondary{
 
-@media(max-width:768px){
+padding:14px 20px;
 
-.resume-actions{
-
-flex-direction:column;
-
-}
-
-.btn{
-
-justify-content:center;
-
-}
-
-.floating-btn{
-
-width:55px;
-
-height:55px;
-
-right:20px;
-
-bottom:20px;
-
-}
-
-}
-
-
-@media(max-width:768px){
-
-.resume-actions{
-
-flex-direction:column;
-
-}
-
-.btn{
-
-justify-content:center;
-
-}
-
-.floating-btn{
-
-width:55px;
-
-height:55px;
-
-right:20px;
-
-bottom:20px;
+font-size:.9rem;
 
 }
 
