@@ -1,0 +1,105 @@
+@media print{
+
+@page{
+
+size:A4;
+
+margin:12mm;
+
+}
+
+body{
+
+background:#ffffff;
+
+padding:0;
+
+}
+
+.resume{
+
+width:100%;
+
+max-width:none;
+
+box-shadow:none;
+
+border-radius:0;
+
+}
+
+.sidebar{
+
+background:#2563eb !important;
+
+color:#ffffff !important;
+
+-webkit-print-color-adjust:exact;
+print-color-adjust:exact;
+
+}
+
+.project-card,
+.experience,
+.education{
+
+break-inside:avoid;
+
+page-break-inside:avoid;
+
+}
+
+a{
+
+color:#000;
+
+text-decoration:none;
+
+}
+
+.content{
+
+padding:30px;
+
+}
+
+.profile img{
+
+border:4px solid #ffffff;
+
+}
+
+.tech span{
+
+background:#dbeafe !important;
+
+color:#1d4ed8 !important;
+
+-webkit-print-color-adjust:exact;
+print-color-adjust:exact;
+
+}
+
+}
+
+@media print{
+
+.resume-actions{
+
+display:none;
+
+}
+
+.floating-btn{
+
+display:none;
+
+}
+
+body{
+
+zoom:95%;
+
+}
+
+}
